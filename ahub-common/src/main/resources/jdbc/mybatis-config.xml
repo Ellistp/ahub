@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties>
-        <property name="dialectClass" value="com.ctp.ghub.orm.dialect.MySql5Dialect"/>
+        <property name="dialectClass" value="com.ahub.common.orm.dialect.MySql5Dialect"/>
     </properties>
 
     <settings>

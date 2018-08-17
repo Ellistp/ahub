@@ -24,7 +24,7 @@ public class AhubFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        logger.info("init ghub filter   ;" + filterConfig.getFilterName());
+        logger.info("init ahub filter   ;" + filterConfig.getFilterName());
     }
 
     @Override

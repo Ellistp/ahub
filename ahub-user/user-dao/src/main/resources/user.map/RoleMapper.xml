@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ahub.user.mapper.RoleMapper" >
 
-    <resultMap id="BaseUserResultMap" type="com.ahub.user.model.RoleDO" >
+    <resultMap id="BaseRoleResultMap" type="com.ahub.user.model.RoleDO" >
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
@@ -23,7 +23,7 @@
         status
     </sql>
 
-    <update id="update" parameterType="com.ctp.ghub.model.RoleDO" >
+    <update id="update" parameterType="com.ahub.user.model.RoleDO" >
         UPDATE acc_role
         SET gmt_modified = now()
         WHERE id = #{id}
@@ -41,7 +41,7 @@
         r.id = #{id}
     </select>
 
-    <select id="selectRoleList" resultMap="BaseUserResultMap">
+    <select id="selectRoleList" resultMap="BaseRoleResultMap">
         select
         <include refid="cols"/>
         from acc_role

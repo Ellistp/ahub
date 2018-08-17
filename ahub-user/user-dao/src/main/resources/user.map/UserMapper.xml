@@ -35,7 +35,7 @@
         organization_id
     </sql>
 
-    <update id="update" parameterType="com.ctp.ghub.model.UserDO" >
+    <update id="update" parameterType="com.ahub.user.model.UserDO" >
         UPDATE acc_user
         SET gmt_modified = now()
         WHERE id = #{id}

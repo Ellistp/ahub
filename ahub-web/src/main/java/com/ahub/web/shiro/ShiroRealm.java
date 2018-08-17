@@ -1,9 +1,9 @@
 package com.ahub.web.shiro;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.ahub.common.model.ShiroUser;
 import com.ahub.user.model.UserDO;
 import com.ahub.user.service.RoleService;
 import com.ahub.user.service.UserService;
@@ -28,15 +28,16 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author：zhixuan.wang
  * @date：2015/10/1 14:51
  */
-public class ShiroDbRealm extends AuthorizingRealm {
-    private static final Logger LOGGER = LogManager.getLogger(ShiroDbRealm.class);
+public class ShiroRealm extends AuthorizingRealm {
+    private static final Logger LOGGER = LogManager.getLogger(ShiroRealm.class);
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private RoleService roleService;
     
-    public ShiroDbRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
+    public ShiroRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
         super(cacheManager, matcher);
     }
     

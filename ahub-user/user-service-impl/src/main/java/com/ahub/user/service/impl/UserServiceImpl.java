@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @description
  * @date 2018/8/17
  */
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService{
 
     @Resource

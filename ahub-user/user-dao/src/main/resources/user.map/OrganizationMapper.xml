@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahub.user.mapper.OrganizationMapper" >
+
+    <resultMap id="BaseResourceResultMap" type="com.ahub.user.model.OrganizationDO" >
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="seq" property="seq" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="cols" >
+        id,
+        gmt_create,
+        gmt_modified,
+        name,
+        address,
+        code,
+        icon,
+        parent_id,
+        seq
+    </sql>
+
+    <update id="update" parameterType="com.ahub.user.model.OrganizationDO" >
+        UPDATE org_organization
+        SET gmt_modified = now()
+        WHERE id = #{id}
+    </update>
+</mapper>

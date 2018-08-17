@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.ahub.web.shiro;
+package com.ahub.common.model;
 
 import java.io.Serializable;
 import java.util.Set;

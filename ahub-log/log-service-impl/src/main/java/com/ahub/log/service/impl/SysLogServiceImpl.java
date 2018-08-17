@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @description
  * @date 2018/8/17
  */
-@Service
+@Service("sysLogService")
 public class SysLogServiceImpl implements SysLogService{
 
     @Autowired

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahub.user.mapper.ResourceMapper" >
+
+    <resultMap id="BaseResourceResultMap" type="com.ahub.user.model.ResourceDO" >
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="open_mode" property="openMode" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="seq" property="seq" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="resource_type" property="resourceType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="cols" >
+        id,
+        gmt_create,
+        gmt_modified,
+        name,
+        url,
+        open_mode,
+        description,
+        icon,
+        parent_id,
+        seq,
+        status,
+        resource_type
+    </sql>
+
+    <update id="update" parameterType="com.ahub.user.model.ResourceDO" >
+        UPDATE res_resource
+        SET gmt_modified = now()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectResourceListByRoleIdList" resultMap="BaseResourceResultMap"
+            parameterType="java.lang.Long">
+        SELECT
+        <include refid="cols"/>
+        FROM
+        acc_role r
+        LEFT JOIN acc_role_resource e ON r.id = e.role_id
+        LEFT JOIN res_resource s ON e.resource_id = s.id
+        WHERE
+        r.id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND s.resource_type = 0
+        ORDER BY seq
+    </select>
+</mapper>

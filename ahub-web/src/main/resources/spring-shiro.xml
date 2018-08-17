@@ -10,7 +10,7 @@
     <!--安全管理器-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--设置自定义Realm-->
-        <property name="realm" ref="shiroDbRealm"/>
+        <property name="realm" ref="shiroRealm"/>
         <!--将缓存管理器，交给安全管理器-->
         <property name="cacheManager" ref="shiroSpringCacheManager"/>
         <!-- 记住密码管理 -->
@@ -19,7 +19,7 @@
     </bean>
 
     <!-- 項目自定义的Realm -->
-    <bean id="shiroDbRealm" class="com.ahub.web.shiro.ShiroDbRealm">
+    <bean id="shiroRealm" class="com.ahub.web.shiro.ShiroRealm">
         <constructor-arg index="0" name="cacheManager" ref="shiroSpringCacheManager"/>
         <constructor-arg index="1" name="matcher" ref="credentialsMatcher"/>
         <!-- 启用身份验证缓存，即缓存AuthenticationInfo信息，默认false -->

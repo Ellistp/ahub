@@ -19,6 +19,7 @@
     <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
     <dubbo:reference id="userService" interface="com.ahub.user.service.UserService" timeout="1200000"/>
     <dubbo:reference id="sysLogService" interface="com.ahub.log.service.SysLogService" timeout="1200000"/>
+    <dubbo:reference id="RoleService" interface="com.ahub.user.service.RoleService" timeout="1200000"/>
 
     <!-- 开发环境配置 -->
     <beans profile="dev">

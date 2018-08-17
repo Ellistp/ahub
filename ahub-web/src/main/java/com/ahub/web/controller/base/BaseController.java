@@ -6,7 +6,7 @@ import java.util.Date;
 import com.ahub.common.model.Result;
 import com.ahub.common.utils.PageInfo;
 import com.ahub.web.utils.StringEscapeEditor;
-import com.ahub.web.shiro.ShiroUser;
+import com.ahub.common.model.ShiroUser;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

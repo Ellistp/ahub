@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ahub.user.mapper.UserRoleMapper" >
 
-    <resultMap id="BaseUserResultMap" type="com.ahub.user.model.UserRoleDO" >
+    <resultMap id="BaseUserRoleResultMap" type="com.ahub.user.model.UserRoleDO" >
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
@@ -19,7 +19,7 @@
         role_id
     </sql>
 
-    <update id="update" parameterType="com.ctp.ghub.model.UserRoleDO" >
+    <update id="update" parameterType="com.ahub.user.model.UserRoleDO" >
         UPDATE acc_user_role
         SET gmt_modified = now()
         WHERE id = #{id}
@@ -28,6 +28,20 @@
     <select id="listRoleIds" resultType="java.lang.Long" parameterType="java.lang.Long">
         select
         role_id
+        from acc_user_role
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseUserRoleResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="cols"/>
+        from acc_user_role
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectRoleIdListByUserId" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select
+        role_id AS roleId
         from acc_user_role
         where user_id = #{userId}
     </select>
