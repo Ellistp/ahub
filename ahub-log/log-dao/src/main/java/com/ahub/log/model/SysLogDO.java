@@ -1,10 +1,14 @@
 package com.ahub.log.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import com.ahub.common.model.BaseDO;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,18 +21,18 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class SysLogDO implements Serializable{
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("sys_log")
+public class SysLogDO extends BaseDO implements Serializable{
 
+    @TableField(exist = false)
     private static final long serialVersionUID = -2326845148851099545L;
 
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
+    @TableField(value = "user_id")
     private Long userId;
 
+    @TableField(value = "opt_desc")
     private String optDesc;
 
     private String url;

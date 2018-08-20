@@ -1,10 +1,14 @@
 package com.ahub.user.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import com.ahub.common.model.BaseDO;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,17 +21,17 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class UserRoleDO implements Serializable{
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("acc_user_role")
+public class UserRoleDO extends BaseDO implements Serializable{
 
+    @TableField(exist = false)
     private static final long serialVersionUID = -3023056791640939544L;
 
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
+    @TableField(value = "user_id")
     private Long userId;
 
+    @TableField(value = "role_id")
     private Long roleId;
 }

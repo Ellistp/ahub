@@ -1,10 +1,14 @@
 package com.ahub.user.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import com.ahub.common.model.BaseDO;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,15 +21,13 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class OrganizationDO implements Serializable{
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("org_organization")
+public class OrganizationDO extends BaseDO implements Serializable{
 
+    @TableField(exist = false)
     private static final long serialVersionUID = -6890282155313817667L;
-
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
 
     private String name;
 
@@ -35,6 +37,7 @@ public class OrganizationDO implements Serializable{
 
     private String icon;
 
+    @TableField(value = "parent_id")
     private Long parentId;
 
     private Integer seq;
