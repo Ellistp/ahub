@@ -1,6 +1,9 @@
 package com.ahub.user.service;
 
-import com.ahub.user.model.ResourceDO;
+import java.util.List;
+
+import com.ahub.common.model.Tree;
+import com.ahub.user.model.OrganizationDO;
 
 /**
  * @author chengtianping
@@ -11,17 +14,17 @@ public interface OrganizationService {
 
     /**
      * 添加记录
-     * @param resourceDO
+     * @param organizationDO
      * @return
      */
-    int insert(ResourceDO resourceDO);
+    int insert(OrganizationDO organizationDO);
 
     /**
      * 更新记录
-     * @param resourceDO
+     * @param organizationDO
      * @return
      */
-    int update(ResourceDO resourceDO);
+    int update(OrganizationDO organizationDO);
 
     /**
      * 删除记录
@@ -29,4 +32,15 @@ public interface OrganizationService {
      * @return
      */
     int delete(Long id);
+
+    /**
+     * 查询记录
+     * @param id
+     * @return
+     */
+    OrganizationDO selectById(Long id);
+
+    List<Tree> selectTree();
+
+    List<OrganizationDO> selectTreeGrid();
 }

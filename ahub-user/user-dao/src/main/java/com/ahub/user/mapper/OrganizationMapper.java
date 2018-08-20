@@ -16,4 +16,6 @@ public interface OrganizationMapper extends BaseMapper<OrganizationDO>{
      * @return
      */
     int update(OrganizationDO organizationDO);
+
+
 }

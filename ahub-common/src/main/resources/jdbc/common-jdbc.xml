@@ -82,7 +82,7 @@
 
     <!-- 事务 aop 配置 -->
     <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.ahub.user.service.impl..*(..)),com.ahub.log.service.impl..*(..))"/>
+        <aop:pointcut id="serviceMethods" expression="execution(* com.ahub.user.service.impl..*(..));com.ahub.log.service.impl..*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
 

@@ -23,9 +23,23 @@
     cglib而不是jdk的来生成代理方法，这样AOP可以拦截到Controller -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
+    <!-- Spring csrf 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/login" />
+            <bean class="com.ahub.web.csrf.CsrfInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- csrf HttpSessionCsrfTokenRepository bean init -->
+    <bean class="com.ahub.web.csrf.HttpSessionCsrfTokenRepository" />
+
+    <!-- 启用shrio 控制器授权注解拦截方式 -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
     <!-- 使用fastjson 配置 ,支持转化的请求数据类型为三种 -->
-    <!-- mvc:annotation-driven 会自动注册RequestMappingHandlerMapping与
-    RequestMappingHandlerAdapter两个Bean,这是Spring MVC为@Controller分发请求所必需的 -->
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
