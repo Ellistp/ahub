@@ -1,5 +1,7 @@
 package com.ahub.user;
 
+import java.util.Date;
+
 import com.ahub.common.junit.BaseSpringJunitTest;
 import com.ahub.user.mapper.UserMapper;
 import com.ahub.user.model.UserDO;
@@ -29,6 +31,17 @@ public class UserTest extends BaseSpringJunitTest {
     public void insert(){
         UserDO userDO = new UserDO();
         userDO.setAccount("程天平");
+        userDO.setAge(12);
+        userDO.setGmtCreate(new Date());
+        userDO.setGmtModified(new Date());
+        userDO.setName("chengtianping");
+        userDO.setOrganizationId(6L);
+        userDO.setPassword("test");
+        userDO.setPhone("13732252967");
+        userDO.setSalt("fdfdf");
+        userDO.setSex(1);
+        userDO.setStatus(1);
+        userDO.setUserType(1);
         this.userMapper.insert(userDO);
         userId = userDO.getId();
     }
@@ -36,6 +49,12 @@ public class UserTest extends BaseSpringJunitTest {
     @Test
     public void testSelectById(){
         UserDO userDO = this.userMapper.selectById(userId);
+        Assert.assertNotNull(userDO);
+    }
+
+    @Test
+    public void testSelectByAccount(){
+        UserDO userDO = this.userMapper.selectByAccount("test");
         Assert.assertNotNull(userDO);
     }
 }
