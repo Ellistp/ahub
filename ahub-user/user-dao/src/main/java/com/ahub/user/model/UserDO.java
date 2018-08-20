@@ -2,7 +2,7 @@ package com.ahub.user.model;
 
 import java.io.Serializable;
 
-import com.ahub.common.model.BaseDO;
+import com.ahub.common.model.base.BaseDO;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.AllArgsConstructor;
@@ -38,7 +38,7 @@ public class UserDO extends BaseDO implements Serializable {
 
     private String name;
 
-    private String salt;
+    //private String salt;
 
     private String password;
 

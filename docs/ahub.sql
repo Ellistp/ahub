@@ -211,7 +211,7 @@ CREATE TABLE `acc_user` (
   `gmt_modified` datetime NOT NULL COMMENT '修改时间',
   `account` VARCHAR(64) NOT NULL COMMENT '登陆名',
   `name` VARCHAR(64) NOT NULL COMMENT '用户名',
-  `salt` varchar(32) NOT NULL COMMENT '加盐',
+--   `salt` varchar(32) NOT NULL COMMENT '加盐',
   `password` VARCHAR(64) NOT NULL COMMENT '密码',
   `sex` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '性别',
   `age` TINYINT(2) DEFAULT '0' COMMENT '年龄',
@@ -221,10 +221,10 @@ CREATE TABLE `acc_user` (
   `organization_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '所属机构',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
-INSERT INTO `acc_user` VALUES ('1', '2018-07-24 15:56:37','2018-07-24 15:56:37','admin', 'admin', '9c6bdd0d12eefaf42ecf978779ac6b2a','46a9e4b7118f3a2b4c7568a26b5aefa5', '0', '25', '18707173376', '0', '0', '1');
-INSERT INTO `acc_user` VALUES ('13', '2018-07-24 15:56:37','2018-07-24 15:56:37','snoopy', 'snoopy', '9c6bdd0d12eefaf42ecf978779ac6b2a','46a9e4b7118f3a2b4c7568a26b5aefa5', '0', '25', '18707173376', '1', '0', '3');
-INSERT INTO `acc_user` VALUES ('14', '2018-07-24 15:56:37','2018-07-24 15:56:37','lisi', 'lisi', '9c6bdd0d12eefaf42ecf978779ac6b2a','46a9e4b7118f3a2b4c7568a26b5aefa5', '0', '25', '18707173376', '1', '0', '5');
-INSERT INTO `acc_user` VALUES ('15', '2018-07-24 15:56:37','2018-07-24 15:56:37','test', 'test', '9c6bdd0d12eefaf42ecf978779ac6b2a','46a9e4b7118f3a2b4c7568a26b5aefa5', '0', '25', '18707173376', '1', '0', '6');
+INSERT INTO `acc_user` VALUES ('1', '2018-07-24 15:56:37','2018-07-24 15:56:37','admin', 'admin','098f6bcd4621d373cade4e832627b4f6', '0', '25', '18707173376', '0', '0', '1');
+INSERT INTO `acc_user` VALUES ('13', '2018-07-24 15:56:37','2018-07-24 15:56:37','snoopy', 'snoopy','098f6bcd4621d373cade4e832627b4f6', '0', '25', '18707173376', '1', '0', '3');
+INSERT INTO `acc_user` VALUES ('14', '2018-07-24 15:56:37','2018-07-24 15:56:37','lisi', 'lisi','098f6bcd4621d373cade4e832627b4f6', '0', '25', '18707173376', '1', '0', '5');
+INSERT INTO `acc_user` VALUES ('15', '2018-07-24 15:56:37','2018-07-24 15:56:37','test', 'test','098f6bcd4621d373cade4e832627b4f6', '0', '25', '18707173376', '1', '0', '6');
 
 /*用户角色表*/
 DROP TABLE IF EXISTS `acc_user_role`;

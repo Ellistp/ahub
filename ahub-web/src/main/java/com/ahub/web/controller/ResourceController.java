@@ -2,10 +2,10 @@ package com.ahub.web.controller;
 
 import java.util.Date;
 
+import com.ahub.common.model.ShiroUser;
 import com.ahub.user.model.ResourceDO;
 import com.ahub.user.service.ResourceService;
 import com.ahub.web.controller.base.BaseController;
-import com.ahub.common.model.ShiroUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ public class ResourceController extends BaseController {
      *
      * @return
      */
-    @PostMapping("/tree")
+    @RequestMapping("/tree")
     @ResponseBody
     public Object tree() {
         ShiroUser shiroUser = getShiroUser();

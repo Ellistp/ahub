@@ -12,7 +12,9 @@ import org.apache.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -29,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date：2015/10/1 14:51
  */
 public class ShiroRealm extends AuthorizingRealm {
+
     private static final Logger LOGGER = LogManager.getLogger(ShiroRealm.class);
 
     @Autowired
@@ -48,17 +51,17 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authcToken) throws AuthenticationException {
-        LOGGER.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         UserDO userDO = this.userService.selectByAccount(token.getUsername());
         // 账号不存在
         if (userDO == null) {
-            return null;
+            //没找到帐号
+            throw new UnknownAccountException();
         }
 
         // 账号未启用
         if (userDO.getStatus() == 1) {
-            return null;
+            throw new LockedAccountException();
         }
         // 读取用户的url和角色
         Map<String, Set<String>> resourceMap = roleService.selectResourceMapByUserId(userDO.getId());
@@ -74,13 +77,11 @@ public class ShiroRealm extends AuthorizingRealm {
      * Shiro权限认证
      */
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(
-            PrincipalCollection principals) {
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.setRoles(shiroUser.getRoles());
         info.addStringPermissions(shiroUser.getUrlSet());
-        
         return info;
     }
     

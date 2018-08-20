@@ -38,7 +38,7 @@ public class UserTest extends BaseSpringJunitTest {
         userDO.setOrganizationId(6L);
         userDO.setPassword("test");
         userDO.setPhone("13732252967");
-        userDO.setSalt("fdfdf");
+        //userDO.setSalt("fdfdf");
         userDO.setSex(1);
         userDO.setStatus(1);
         userDO.setUserType(1);

@@ -2,11 +2,14 @@ package com.ahub.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ahub.common.model.ErrorConstant;
+import com.ahub.common.model.Result;
 import com.ahub.common.utils.CaptchaUtils;
 import com.ahub.web.controller.base.BaseController;
 import com.ahub.web.csrf.CsrfToken;
 import com.ahub.web.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -19,11 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * @description：登录退出
- * @author：zhixuan.wang
- * @date：2015/10/1 14:51
- */
+
 @Controller
 public class LoginController extends BaseController {
     /**
@@ -54,7 +53,6 @@ public class LoginController extends BaseController {
     @GetMapping("/login")
     @CsrfToken(create = true)
     public String login() {
-        logger.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
         }
@@ -71,9 +69,8 @@ public class LoginController extends BaseController {
     @PostMapping("/login")
     @CsrfToken(remove = true)
     @ResponseBody
-    public Object loginPost(HttpServletRequest request, String username, String password, String captcha,
+    public Result loginPost(HttpServletRequest request, String username, String password, String captcha,
                             @RequestParam(value = "rememberMe", defaultValue = "1") Integer rememberMe) {
-        logger.info("POST请求登录");
         // 改为全部抛出异常，避免ajax csrf token被刷新
         if (StringUtils.isBlank(username)) {
             throw new RuntimeException("用户名不能为空");
@@ -93,15 +90,15 @@ public class LoginController extends BaseController {
         token.setRememberMe(1 == rememberMe);
         try {
             user.login(token);
-            return renderSuccess();
+            return Result.createSuccessResult();
         } catch (UnknownAccountException e) {
-            throw new RuntimeException("账号不存在！", e);
+            return Result.createFailResult(ErrorConstant.ACCOUNT_NOT_EXIST_ERROR);
         } catch (DisabledAccountException e) {
-            throw new RuntimeException("账号未启用！", e);
+            return Result.createFailResult(ErrorConstant.ACCOUNT_DISABLED_ERROR);
         } catch (IncorrectCredentialsException e) {
-            throw new RuntimeException("密码错误！", e);
-        } catch (Throwable e) {
-            throw new RuntimeException(e.getMessage(), e);
+            return Result.createFailResult(ErrorConstant.INCORRECT_CREDENTIALS_ERROR);
+        } catch (AuthenticationException e) {
+            return Result.createFailResult(ErrorConstant.GENERAL_AUTH_ERROR);
         }
     }
 
@@ -124,7 +121,6 @@ public class LoginController extends BaseController {
     @PostMapping("/logout")
     @ResponseBody
     public Object logout() {
-        logger.info("登出");
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return renderSuccess();

@@ -42,7 +42,18 @@
     <select id="selectResourceListByRoleIdList" resultMap="BaseResourceResultMap"
             parameterType="java.lang.Long">
         SELECT
-        <include refid="cols"/>
+        s.id,
+        s.gmt_create,
+        s.gmt_modified,
+        s.name,
+        s.url,
+        s.open_mode,
+        s.description,
+        s.icon,
+        s.parent_id,
+        s.seq,
+        s.status,
+        s.resource_type
         FROM
         acc_role r
         LEFT JOIN acc_role_resource e ON r.id = e.role_id

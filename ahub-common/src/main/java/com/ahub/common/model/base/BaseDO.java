@@ -1,4 +1,4 @@
-package com.ahub.common.model;
+package com.ahub.common.model.base;
 
 import java.util.Date;
 

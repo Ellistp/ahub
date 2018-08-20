@@ -24,12 +24,12 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- Spring csrf 拦截器 -->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/login" />
-            <bean class="com.ahub.web.csrf.CsrfInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/login" />-->
+            <!--<bean class="com.ahub.web.csrf.CsrfInterceptor" />-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 
     <!-- csrf HttpSessionCsrfTokenRepository bean init -->
     <bean class="com.ahub.web.csrf.HttpSessionCsrfTokenRepository" />
