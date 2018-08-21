@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	http://www.springframework.org/schema/context
@@ -30,14 +30,11 @@
             <bean class="com.ahub.web.csrf.CsrfInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
+    <!-- Spring csrf 拦截器 -->
 
     <!-- csrf HttpSessionCsrfTokenRepository bean init -->
-    <bean class="com.ahub.web.csrf.HttpSessionCsrfTokenRepository" />
-
-    <!-- 启用shrio 控制器授权注解拦截方式 -->
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
+    <bean id = "csrfTokenRepository" class="com.ahub.web.csrf.HttpSessionCsrfTokenRepository" />
+    <!-- csrf HttpSessionCsrfTokenRepository bean init -->
 
     <!-- 使用fastjson 配置 ,支持转化的请求数据类型为三种 -->
     <mvc:annotation-driven>

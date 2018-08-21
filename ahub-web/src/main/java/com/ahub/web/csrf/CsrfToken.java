@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 /**
  * Csrf过滤注解
- * @author L.cm
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

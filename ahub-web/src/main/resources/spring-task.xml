@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 扫描 event包 -->
+    <!-- 扫描 job包 -->
     <context:component-scan base-package="com.ahub.web.job"/>
 
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
@@ -24,7 +24,7 @@
         <property name="keepAliveSeconds" value="${task.keep_alive_seconds}" />
     </bean>
 
-    <!-- 注解式 -->
+    <!-- 定时任务注解开启 -->
     <task:annotation-driven executor="taskExecutor" proxy-target-class="true"/>
 
     <!-- 开发环境配置 -->

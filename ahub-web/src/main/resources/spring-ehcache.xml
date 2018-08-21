@@ -19,5 +19,5 @@
     </bean>
     
     <!-- cache注解，和spring-redis.xml中的只能使用一个 -->
-    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>
+    <cache:annotation-driven proxy-target-class="true"/>
 </beans>
