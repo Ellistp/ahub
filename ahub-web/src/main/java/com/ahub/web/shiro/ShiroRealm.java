@@ -5,8 +5,8 @@ import java.util.Set;
 
 import com.ahub.common.model.ShiroUser;
 import com.ahub.user.model.UserDO;
-import com.ahub.user.service.RoleService;
-import com.ahub.user.service.UserService;
+import com.ahub.user.service.IRoleService;
+import com.ahub.user.service.IUserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
@@ -35,10 +35,10 @@ public class ShiroRealm extends AuthorizingRealm {
     private static final Logger LOGGER = LogManager.getLogger(ShiroRealm.class);
 
     @Autowired
-    private UserService userService;
+    private IUserService IUserService;
 
     @Autowired
-    private RoleService roleService;
+    private IRoleService IRoleService;
     
     public ShiroRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
         super(cacheManager, matcher);
@@ -52,7 +52,7 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authcToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        UserDO userDO = this.userService.selectByAccount(token.getUsername());
+        UserDO userDO = this.IUserService.selectByAccount(token.getUsername());
         // 账号不存在
         if (userDO == null) {
             //没找到帐号
@@ -64,7 +64,7 @@ public class ShiroRealm extends AuthorizingRealm {
             throw new LockedAccountException();
         }
         // 读取用户的url和角色
-        Map<String, Set<String>> resourceMap = roleService.selectResourceMapByUserId(userDO.getId());
+        Map<String, Set<String>> resourceMap = IRoleService.selectResourceMapByUserId(userDO.getId());
         Set<String> urls = resourceMap.get("urls");
         Set<String> roles = resourceMap.get("roles");
         ShiroUser shiroUser = new ShiroUser(userDO.getId(), userDO.getAccount(), userDO.getName(), urls);

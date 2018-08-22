@@ -6,20 +6,14 @@ import java.util.Set;
 
 import com.ahub.common.utils.PageInfo;
 import com.ahub.user.model.RoleDO;
+import com.baomidou.mybatisplus.service.IService;
 
 /**
  * @author chengtianping
  * @description
  * @date 2018/8/17
  */
-public interface RoleService {
-
-    /**
-     * 添加记录
-     * @param roleDO
-     * @return
-     */
-    int insert(RoleDO roleDO);
+public interface IRoleService extends IService<RoleDO>{
 
     /**
      * 更新记录
@@ -27,20 +21,6 @@ public interface RoleService {
      * @return
      */
     int update(RoleDO roleDO);
-
-    /**
-     * 删除记录
-     * @param id
-     * @return
-     */
-    int delete(Long id);
-
-    /**
-     * 查询记录
-     * @param id
-     * @return
-     */
-    RoleDO selectById(Long id);
 
     void selectDataGrid(PageInfo pageInfo);
 

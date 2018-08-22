@@ -10,8 +10,9 @@ import com.ahub.user.mapper.ResourceMapper;
 import com.ahub.user.mapper.RoleMapper;
 import com.ahub.user.mapper.UserRoleMapper;
 import com.ahub.user.model.ResourceDO;
-import com.ahub.user.service.ResourceService;
+import com.ahub.user.service.IResourceService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,8 @@ import org.springframework.stereotype.Service;
  * @description
  * @date 2018/8/17
  */
-@Service("resourceService")
-public class ResourceServiceImpl implements ResourceService{
+@Service("iResourceService")
+public class IResourceServiceImpl extends ServiceImpl<ResourceMapper,ResourceDO> implements IResourceService {
 
     // 菜单
     private static final int RESOURCE_MENU = 0;
@@ -36,23 +37,8 @@ public class ResourceServiceImpl implements ResourceService{
     RoleMapper roleMapper;
 
     @Override
-    public int insert(ResourceDO resourceDO) {
-        return resourceMapper.insert(resourceDO);
-    }
-
-    @Override
     public int update(ResourceDO resourceDO) {
         return resourceMapper.update(resourceDO);
-    }
-
-    @Override
-    public int delete(Long id) {
-        return resourceMapper.deleteById(id);
-    }
-
-    @Override
-    public ResourceDO selectById(Long id) {
-        return resourceMapper.selectById(id);
     }
 
     @Override

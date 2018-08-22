@@ -6,8 +6,9 @@ import java.util.List;
 import com.ahub.common.model.Tree;
 import com.ahub.user.mapper.OrganizationMapper;
 import com.ahub.user.model.OrganizationDO;
-import com.ahub.user.service.OrganizationService;
+import com.ahub.user.service.IOrganizationService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,30 +17,15 @@ import org.springframework.stereotype.Service;
  * @description
  * @date 2018/8/20
  */
-@Service("organizationService")
-public class OrganizationServiceImpl implements OrganizationService{
+@Service("iOrganizationService")
+public class IOrganizationServiceImpl extends ServiceImpl<OrganizationMapper,OrganizationDO> implements IOrganizationService {
 
     @Autowired
     OrganizationMapper organizationMapper;
 
     @Override
-    public int insert(OrganizationDO organizationDO) {
-        return organizationMapper.insert(organizationDO);
-    }
-
-    @Override
     public int update(OrganizationDO organizationDO) {
         return organizationMapper.update(organizationDO);
-    }
-
-    @Override
-    public int delete(Long id) {
-        return organizationMapper.deleteById(id);
-    }
-
-    @Override
-    public OrganizationDO selectById(Long id) {
-        return organizationMapper.selectById(id);
     }
 
     @Override

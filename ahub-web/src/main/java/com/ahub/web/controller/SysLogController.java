@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ahub.common.utils.PageInfo;
-import com.ahub.log.service.SysLogService;
+import com.ahub.log.service.ISysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SysLogController {
 
     @Autowired
-    private SysLogService sysLogService;
+    private ISysLogService ISysLogService;
 
     @GetMapping("/manager")
     public String manager() {
@@ -34,7 +34,7 @@ public class SysLogController {
         PageInfo pageInfo = new PageInfo(page, rows);
         Map<String, Object> condition = new HashMap<String, Object>();
         pageInfo.setCondition(condition);
-        sysLogService.selectDataGrid(pageInfo);
+        ISysLogService.selectDataGrid(pageInfo);
         return pageInfo;
     }
 }

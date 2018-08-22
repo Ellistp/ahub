@@ -4,7 +4,8 @@ import javax.annotation.Resource;
 
 import com.ahub.user.mapper.UserMapper;
 import com.ahub.user.model.UserDO;
-import com.ahub.user.service.UserService;
+import com.ahub.user.service.IUserService;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,30 +13,15 @@ import org.springframework.stereotype.Service;
  * @description
  * @date 2018/8/17
  */
-@Service("userService")
-public class UserServiceImpl implements UserService{
+@Service("iUserService")
+public class IUserServiceImpl extends ServiceImpl<UserMapper,UserDO>  implements IUserService {
 
     @Resource
     UserMapper userMapper;
 
     @Override
-    public int insert(UserDO userDO) {
-        return userMapper.insert(userDO);
-    }
-
-    @Override
     public int update(UserDO userDO) {
         return userMapper.update(userDO);
-    }
-
-    @Override
-    public int delete(Long id) {
-        return userMapper.deleteById(id);
-    }
-
-    @Override
-    public UserDO selectById(Long id) {
-        return userMapper.selectById(id);
     }
 
     @Override

@@ -14,9 +14,10 @@ import com.ahub.user.mapper.RoleResourceMapper;
 import com.ahub.user.mapper.UserRoleMapper;
 import com.ahub.user.model.RoleDO;
 import com.ahub.user.model.RoleResourceDO;
-import com.ahub.user.service.RoleService;
+import com.ahub.user.service.IRoleService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ import org.springframework.stereotype.Service;
  * @description
  * @date 2018/8/17
  */
-@Service("roleService")
-public class RoleServiceImpl implements RoleService{
+@Service("iRoleService")
+public class IRoleServiceImpl extends ServiceImpl<RoleMapper,RoleDO> implements IRoleService {
 
     @Autowired
     RoleMapper roleMapper;
@@ -39,23 +40,8 @@ public class RoleServiceImpl implements RoleService{
     RoleResourceMapper roleResourceMapper;
 
     @Override
-    public int insert(RoleDO roleDO) {
-        return roleMapper.insert(roleDO);
-    }
-
-    @Override
     public int update(RoleDO roleDO) {
         return roleMapper.update(roleDO);
-    }
-
-    @Override
-    public int delete(Long id) {
-        return roleMapper.deleteById(id);
-    }
-
-    @Override
-    public RoleDO selectById(Long id) {
-        return roleMapper.selectById(id);
     }
 
     @Override

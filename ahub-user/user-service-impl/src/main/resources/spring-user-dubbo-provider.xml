@@ -17,8 +17,10 @@
     <dubbo:protocol name="dubbo" port="20880" />
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.ahub.user.service.UserService" ref="userService" timeout="1200000"/>
-    <dubbo:service interface="com.ahub.user.service.RoleService" ref="roleService" timeout="1200000"/>
+    <dubbo:service interface="com.ahub.user.service.IUserService" ref="iUserService" timeout="1200000"/>
+    <dubbo:service interface="com.ahub.user.service.IOrganizationService" ref="iOrganizationService" timeout="1200000"/>
+    <dubbo:service interface="com.ahub.user.service.IResourceService" ref="iResourceService" timeout="1200000"/>
+    <dubbo:service interface="com.ahub.user.service.IRoleService" ref="iRoleService" timeout="1200000"/>
 
     <!-- 开发环境配置 -->
     <beans profile="dev">

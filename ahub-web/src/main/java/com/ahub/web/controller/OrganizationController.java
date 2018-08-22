@@ -3,7 +3,7 @@ package com.ahub.web.controller;
 import java.util.Date;
 
 import com.ahub.user.model.OrganizationDO;
-import com.ahub.user.service.OrganizationService;
+import com.ahub.user.service.IOrganizationService;
 import com.ahub.web.controller.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class OrganizationController extends BaseController {
 
     @Autowired
-    private OrganizationService organizationService;
+    private IOrganizationService IOrganizationService;
 
     /**
      * 部门管理主页
@@ -41,7 +41,7 @@ public class OrganizationController extends BaseController {
     @PostMapping(value = "/tree")
     @ResponseBody
     public Object tree() {
-        return organizationService.selectTree();
+        return IOrganizationService.selectTree();
     }
 
     /**
@@ -52,7 +52,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/treeGrid")
     @ResponseBody
     public Object treeGrid() {
-        return organizationService.selectTreeGrid();
+        return IOrganizationService.selectTreeGrid();
     }
 
     /**
@@ -75,7 +75,7 @@ public class OrganizationController extends BaseController {
     @ResponseBody
     public Object add(OrganizationDO organization) {
         organization.setGmtCreate(new Date());
-        organizationService.insert(organization);
+        IOrganizationService.insert(organization);
         return renderSuccess("添加成功！");
     }
 
@@ -87,7 +87,7 @@ public class OrganizationController extends BaseController {
      */
     @GetMapping("/editPage")
     public String editPage(Model model, Long id) {
-        OrganizationDO organization = organizationService.selectById(id);
+        OrganizationDO organization = IOrganizationService.selectById(id);
         model.addAttribute("organization", organization);
         return "admin/organizationEdit";
     }
@@ -101,7 +101,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(OrganizationDO organization) {
-        organizationService.update(organization);
+        IOrganizationService.update(organization);
         return renderSuccess("编辑成功！");
     }
 
@@ -114,7 +114,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        organizationService.delete(id);
+        IOrganizationService.deleteById(id);
         return renderSuccess("删除成功！");
     }
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.ahub.common.utils.PageInfo;
 import com.ahub.user.model.RoleDO;
-import com.ahub.user.service.RoleService;
+import com.ahub.user.service.IRoleService;
 import com.ahub.web.controller.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RoleController extends BaseController {
 
     @Autowired
-    private RoleService roleService;
+    private IRoleService IRoleService;
 
     /**
      * 权限管理页
@@ -52,7 +52,7 @@ public class RoleController extends BaseController {
         Map<String, Object> condition = new HashMap<String, Object>();
         pageInfo.setCondition(condition);
 
-        roleService.selectDataGrid(pageInfo);
+        IRoleService.selectDataGrid(pageInfo);
         return pageInfo;
     }
 
@@ -64,7 +64,7 @@ public class RoleController extends BaseController {
     @PostMapping("/tree")
     @ResponseBody
     public Object tree() {
-        return roleService.selectTree();
+        return IRoleService.selectTree();
     }
 
     /**
@@ -86,7 +86,7 @@ public class RoleController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public Object add(RoleDO role) {
-        roleService.insert(role);
+        IRoleService.insert(role);
         return renderSuccess("添加成功！");
     }
 
@@ -99,7 +99,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        roleService.delete(id);
+        IRoleService.deleteById(id);
         return renderSuccess("删除成功！");
     }
 
@@ -112,7 +112,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/editPage")
     public String editPage(Model model, Long id) {
-        RoleDO role = roleService.selectById(id);
+        RoleDO role = IRoleService.selectById(id);
         model.addAttribute("role", role);
         return "admin/roleEdit";
     }
@@ -126,7 +126,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(RoleDO role) {
-        roleService.update(role);
+        IRoleService.update(role);
         return renderSuccess("编辑成功！");
     }
 
@@ -152,7 +152,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/findResourceIdListByRoleId")
     @ResponseBody
     public Object findResourceByRoleId(Long id) {
-        List<Long> resources = roleService.selectResourceIdListByRoleId(id);
+        List<Long> resources = IRoleService.selectResourceIdListByRoleId(id);
         return renderSuccess(resources);
     }
 
@@ -166,7 +166,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/grant")
     @ResponseBody
     public Object grant(Long id, String resourceIds) {
-        roleService.updateRoleResource(id, resourceIds);
+        IRoleService.updateRoleResource(id, resourceIds);
         return renderSuccess("授权成功！");
     }
 

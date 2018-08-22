@@ -1,20 +1,14 @@
 package com.ahub.user.service;
 
 import com.ahub.user.model.UserDO;
+import com.baomidou.mybatisplus.service.IService;
 
 /**
  * @author chengtianping
  * @description
  * @date 2018/8/17
  */
-public interface UserService {
-
-    /**
-     * 添加记录
-     * @param userDO
-     * @return
-     */
-    int insert(UserDO userDO);
+public interface IUserService extends IService<UserDO>{
 
     /**
      * 更新记录
@@ -22,20 +16,6 @@ public interface UserService {
      * @return
      */
     int update(UserDO userDO);
-
-    /**
-     * 删除记录
-     * @param id
-     * @return
-     */
-    int delete(Long id);
-
-    /**
-     * 查询记录
-     * @param id
-     * @return
-     */
-    UserDO selectById(Long id);
 
     /**
      * 根据账户名和密码查询用户信息

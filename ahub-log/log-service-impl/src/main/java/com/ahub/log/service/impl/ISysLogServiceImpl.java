@@ -5,8 +5,9 @@ import java.util.List;
 import com.ahub.common.utils.PageInfo;
 import com.ahub.log.mapper.SysLogMapper;
 import com.ahub.log.model.SysLogDO;
-import com.ahub.log.service.SysLogService;
+import com.ahub.log.service.ISysLogService;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,30 +16,15 @@ import org.springframework.stereotype.Service;
  * @description
  * @date 2018/8/17
  */
-@Service("sysLogService")
-public class SysLogServiceImpl implements SysLogService{
+@Service("iSysLogService")
+public class ISysLogServiceImpl extends ServiceImpl<SysLogMapper,SysLogDO> implements ISysLogService {
 
     @Autowired
     SysLogMapper sysLogMapper;
 
     @Override
-    public int insert(SysLogDO logDO) {
-        return sysLogMapper.insert(logDO);
-    }
-
-    @Override
     public int update(SysLogDO logDO) {
         return sysLogMapper.update(logDO);
-    }
-
-    @Override
-    public int delete(Long id) {
-        return sysLogMapper.deleteById(id);
-    }
-
-    @Override
-    public SysLogDO selectById(Long id) {
-        return sysLogMapper.selectById(id);
     }
 
     @Override

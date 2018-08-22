@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.ahub.common.model.ShiroUser;
 import com.ahub.user.model.ResourceDO;
-import com.ahub.user.service.ResourceService;
+import com.ahub.user.service.IResourceService;
 import com.ahub.web.controller.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ResourceController extends BaseController {
 
     @Autowired
-    private ResourceService resourceService;
+    private IResourceService IResourceService;
 
     /**
      * 菜单树
@@ -33,7 +33,7 @@ public class ResourceController extends BaseController {
     @ResponseBody
     public Object tree() {
         ShiroUser shiroUser = getShiroUser();
-        return resourceService.selectTree(shiroUser);
+        return IResourceService.selectTree(shiroUser);
     }
 
     /**
@@ -54,7 +54,7 @@ public class ResourceController extends BaseController {
     @PostMapping("/treeGrid")
     @ResponseBody
     public Object treeGrid() {
-        return resourceService.selectAll();
+        return IResourceService.selectAll();
     }
 
     /**
@@ -82,7 +82,7 @@ public class ResourceController extends BaseController {
         if (null != type && type == 0) {
             resource.setOpenMode(null);
         }
-        resourceService.insert(resource);
+        IResourceService.insert(resource);
         return renderSuccess("添加成功！");
     }
 
@@ -92,7 +92,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/allTree")
     @ResponseBody
     public Object allMenu() {
-        return resourceService.selectAllMenu();
+        return IResourceService.selectAllMenu();
     }
 
     /**
@@ -101,7 +101,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/allTrees")
     @ResponseBody
     public Object allTree() {
-        return resourceService.selectAllTree();
+        return IResourceService.selectAllTree();
     }
 
     /**
@@ -113,7 +113,7 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/editPage")
     public String editPage(Model model, Long id) {
-        ResourceDO resource = resourceService.selectById(id);
+        ResourceDO resource = IResourceService.selectById(id);
         model.addAttribute("resource", resource);
         return "admin/resourceEdit";
     }
@@ -132,7 +132,7 @@ public class ResourceController extends BaseController {
         if (null != type && type == 0) {
             resource.setOpenMode(null);
         }
-        resourceService.update(resource);
+        IResourceService.update(resource);
         return renderSuccess("编辑成功！");
     }
 
@@ -145,7 +145,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        resourceService.delete(id);
+        IResourceService.deleteById(id);
         return renderSuccess("删除成功！");
     }
 
