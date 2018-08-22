@@ -54,21 +54,12 @@
         <property name="successUrl" value="/index"/>
         <!-- 没有权限跳转的url -->
         <property name="unauthorizedUrl" value="/unauth"/>
-        <property name="filterChainDefinitions">
-            <value>
-                <!-- 
-                    anon  不需要认证
-                    authc 需要认证
-                    user  验证通过或RememberMe登录的都可以
-                -->
-                /captcha.jpg = anon
-                /commons/** = anon
-                /static/** = anon
-                /webhooks = anon
-                /login = anon
-                /** = user
-            </value>
-        </property>
+        <property name="filterChainDefinitions" value="#{shiroConfigLoader.loadFilterConfig()}"/>
+    </bean>
+
+    <!-- Shiro的配置加载器 -->
+    <bean id="shiroConfigLoader" class="com.ahub.web.shiro.ShiroPropertiesLoader">
+        <property name="shiroConfigPath" value="shiro-filter.properties"/>
     </bean>
 
     <!-- 用户授权信息Cache, 采用spring-cache, 具体请查看spring-ehcache.xml、spring-redis.xml -->
