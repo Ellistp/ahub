@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 解决Jackson 差8小时的问题
+ * @author L.cm
  */
 @Component("jacksonObjectMapper")
 public class JacksonObjectMapper extends ObjectMapper {
